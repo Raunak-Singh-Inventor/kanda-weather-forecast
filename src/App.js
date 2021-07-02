@@ -11,15 +11,7 @@ function App() {
       .then((r) => r.text())
       .then((forecasts_text) => {
         let forecasts_arr = forecasts_text.split("\n");
-
-        for (var i = 0; i < forecasts_arr.length; i++) {
-          if (forecasts_arr[i] === "### BEGIN FORECASTS ###") {
-            forecasts_arr.splice(i, 1);
-          }
-          if (forecasts_arr[i] === "") {
-            forecasts_arr.splice(i, 1);
-          }
-        }
+        forecasts_arr.unshift("");
         let forecast_list = [];
         let forecast_dict = {};
         for (var j = 0; j < forecasts_arr.length; j++) {
@@ -68,12 +60,12 @@ function App() {
       <div className="App">
         <header className="App-header">
           <h1 className="title">Kanda Weather Forecast</h1>
-          <p>{forecasts[2].Condition}</p>
+          <p>{forecasts[3].Condition}</p>
         </header>
       </div>
     );
   } else if (!isLoaded) {
-    return <h1>Loading</h1>
+    return <h1>Loading</h1>;
   }
 }
 
