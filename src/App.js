@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import raw_forecasts from "../src/data/forecasts.txt";
+import Calendar from "react-calendar";
+import "./CustomCalender.css";
 import "./App.css";
 
 function App() {
@@ -60,7 +62,44 @@ function App() {
       <div className="App">
         <header className="App-header">
           <h1 className="title">Kanda Weather Forecast</h1>
-          <p>{forecasts[3].Condition}</p>
+          <Calendar
+            onChange={(date) => {
+              let stringDate = String(date);
+              console.log(stringDate);
+              for (var i = 0; i < forecasts.length; i++) {
+                if (
+                  stringDate.includes(
+                    String(forecasts[i].Date)
+                      .replace(",", "")
+                      .replace("January", "Jan")
+                      .replace("February", "Feb")
+                      .replace("March", "Mar")
+                      .replace("April", "Apr")
+                      .replace("June", "Jun")
+                      .replace("July", "Jul")
+                      .replace("August", "Aug")
+                      .replace("September", "Sep")
+                      .replace("October", "Oct")
+                      .replace("November", "Nov")
+                      .replace("December", "Dec")
+                      .replace(" 1 ", " 01 ")
+                      .replace(" 2 ", " 02 ")
+                      .replace(" 3 ", " 03 ")
+                      .replace(" 4 ", " 04 ")
+                      .replace(" 5 ", " 05 ")
+                      .replace(" 6 ", " 06 ")
+                      .replace(" 7 ", " 07 ")
+                      .replace(" 8 ", " 08 ")
+                      .replace(" 9 ", " 09 ")
+                  ) === true
+                ) {
+                  console.log("Bingo");
+                } else {
+                  console.log("No record available");
+                }
+              }
+            }}
+          />
         </header>
       </div>
     );
