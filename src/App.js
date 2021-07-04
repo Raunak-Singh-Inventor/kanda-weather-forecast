@@ -1,8 +1,16 @@
 import { useEffect, useState } from "react";
 import raw_forecasts from "../src/data/forecasts.txt";
-import Calendar from "react-calendar";
-import "./CustomCalender.css";
+import { Application } from "react-rainbow-components";
+import MainBox from "./components/MainBox/MainBox";
 import "./App.css";
+
+const theme = {
+  rainbow: {
+    palette: {
+      brand: "rgba(197, 21, 234, 1)",
+    },
+  },
+};
 
 function App() {
   const [forecasts, setForecasts] = useState([]);
@@ -59,49 +67,10 @@ function App() {
 
   if (isLoaded) {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="title">Kanda Weather Forecast</h1>
-          <Calendar
-            onChange={(date) => {
-              let stringDate = String(date);
-              console.log(stringDate);
-              for (var i = 0; i < forecasts.length; i++) {
-                if (
-                  stringDate.includes(
-                    String(forecasts[i].Date)
-                      .replace(",", "")
-                      .replace("January", "Jan")
-                      .replace("February", "Feb")
-                      .replace("March", "Mar")
-                      .replace("April", "Apr")
-                      .replace("June", "Jun")
-                      .replace("July", "Jul")
-                      .replace("August", "Aug")
-                      .replace("September", "Sep")
-                      .replace("October", "Oct")
-                      .replace("November", "Nov")
-                      .replace("December", "Dec")
-                      .replace(" 1 ", " 01 ")
-                      .replace(" 2 ", " 02 ")
-                      .replace(" 3 ", " 03 ")
-                      .replace(" 4 ", " 04 ")
-                      .replace(" 5 ", " 05 ")
-                      .replace(" 6 ", " 06 ")
-                      .replace(" 7 ", " 07 ")
-                      .replace(" 8 ", " 08 ")
-                      .replace(" 9 ", " 09 ")
-                  ) === true
-                ) {
-                  console.log("Bingo");
-                } else {
-                  console.log("No record available");
-                }
-              }
-            }}
-          />
-        </header>
-      </div>
+      <Application theme={theme}>
+        <h1 className="title">Kanda Weather Forecast</h1>
+        <MainBox forecasts={forecasts} />
+      </Application>
     );
   } else if (!isLoaded) {
     return <h1>Loading</h1>;
