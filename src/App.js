@@ -48,7 +48,7 @@ function App() {
             forecast_dict["Wind"] = forecasts_arr[j + 6].substr(
               forecasts_arr[j + 6].indexOf(":") + 2
             );
-            forecast_dict["Chance of rain"] = forecasts_arr[j + 7].substr(
+            forecast_dict["chanceOfRain"] = forecasts_arr[j + 7].substr(
               forecasts_arr[j + 7].indexOf(":") + 2
             );
             forecast_list.push(forecast_dict);
@@ -67,9 +67,11 @@ function App() {
 
   if (isLoaded) {
     return (
-      <Application theme={theme}>
+      <Application style={{ textAlign: "center" }} theme={theme}>
         <h1 className="title">Kanda Weather Forecast</h1>
-        <MainBox forecasts={forecasts} />
+        <div style={{marginLeft:100}}>
+          <MainBox forecasts={forecasts} />
+        </div>
       </Application>
     );
   } else if (!isLoaded) {

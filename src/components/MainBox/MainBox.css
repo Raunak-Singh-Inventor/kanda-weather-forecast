@@ -1,0 +1,15 @@
+.card {
+  text-align: center;
+}
+
+.temp-text {
+  font-size: 100px;
+}
+
+.cond-text {
+  font-size: 50px;
+}
+
+.humidity-text {
+  font-size: 50px;
+}
