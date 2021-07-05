@@ -8,6 +8,7 @@ export const WeatherDatePicker = (props) => {
     <div className="rainbow-m-around_small">
       <DatePicker
         formatStyle="large"
+        placeholder="Select A Date"
         value={date}
         onChange={(date) => {
           setDate(date);

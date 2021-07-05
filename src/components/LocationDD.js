@@ -7,14 +7,13 @@ export const LocationDD = (props) => {
   return (
     <div className="rainbow-m-around_small">
       <Picklist
+        placeholder="Select A Location"
         formatStyle="large"
         onChange={(value) => {
           setLocation(value);
           props.changed(value);
         }}
         value={location}
-        label="Select Location"
-        hideLabel
       >
         <Option name="header" label="Locations" variant="header" />
         {props.locations.map((location, i) => (

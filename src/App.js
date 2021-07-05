@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import raw_forecasts from "../src/data/forecasts.txt";
 import { Application } from "react-rainbow-components";
+import { LocationDD } from "./components/LocationDD";
+import { WeatherDatePicker } from "./components/WeatherDatePicker";
 import MainBox from "./components/MainBox/MainBox";
 import "./App.css";
 
@@ -15,6 +17,11 @@ const theme = {
 function App() {
   const [forecasts, setForecasts] = useState([]);
   const [isLoaded, setisLoaded] = useState(false);
+  const [locations, setLocations] = useState([]);
+  const [date, setDate] = useState(new Date());
+  const [locationState, setLocationState] = useState("");
+  const [userForecast, setUserForecast] = useState({});
+  const [isForecastPresent, setIsForecastPresent] = useState(false);
 
   const getData = () => {
     fetch(raw_forecasts)
@@ -65,12 +72,61 @@ function App() {
     getData();
   }, []);
 
+  useEffect(()=>{
+    let locations_list = [];
+    for (var i = 0; i < forecasts.length; i++) {
+      locations_list.push(forecasts[i].Location);
+    }
+    setLocations(Array.from(new Set(locations_list)));
+  })
+
+  useEffect(() => {
+    for (var i = 0; i < forecasts.length; i++) {
+      if (
+        String(date).includes(
+          String(forecasts[i].Date)
+            .replace(",", "")
+            .replace("January", "Jan")
+            .replace("February", "Feb")
+            .replace("March", "Mar")
+            .replace("April", "Apr")
+            .replace("June", "Jun")
+            .replace("July", "Jul")
+            .replace("August", "Aug")
+            .replace("September", "Sep")
+            .replace("October", "Oct")
+            .replace("November", "Nov")
+            .replace("December", "Dec")
+            .replace(" 1 ", " 01 ")
+            .replace(" 2 ", " 02 ")
+            .replace(" 3 ", " 03 ")
+            .replace(" 4 ", " 04 ")
+            .replace(" 5 ", " 05 ")
+            .replace(" 6 ", " 06 ")
+            .replace(" 7 ", " 07 ")
+            .replace(" 8 ", " 08 ")
+            .replace(" 9 ", " 09 ")
+        ) === true &&
+        locationState.label === forecasts[i].Location
+      ) {
+        setUserForecast(forecasts[i]);
+        setIsForecastPresent(true);
+      } else {
+        setIsForecastPresent(false);
+      }
+    }
+  }, [date, locationState, forecasts]);
+
   if (isLoaded) {
     return (
       <Application style={{ textAlign: "center" }} theme={theme}>
         <h1 className="title">Kanda Weather Forecast</h1>
-        <div style={{marginLeft:100}}>
-          <MainBox forecasts={forecasts} />
+        <div>
+          <div style={{ alignItems:"center", justifyContent:"center", display: "flex", flexDirection: "row" }}>
+            <WeatherDatePicker changed={setDate} />
+            <LocationDD changed={setLocationState} locations={locations} />
+          </div>
+          <MainBox isForecastPresent={isForecastPresent} userForecast={userForecast}/>
         </div>
       </Application>
     );
