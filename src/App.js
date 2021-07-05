@@ -3,7 +3,7 @@ import raw_forecasts from "../src/data/forecasts.txt";
 import { Application } from "react-rainbow-components";
 import { LocationDD } from "./components/LocationDD";
 import { WeatherDatePicker } from "./components/WeatherDatePicker";
-import MainBox from "./components/MainBox/MainBox";
+import TempCondHumidCard from "./components/TempCondHumidCard/TempCondHumidCard";
 import "./App.css";
 
 const theme = {
@@ -72,13 +72,13 @@ function App() {
     getData();
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     let locations_list = [];
     for (var i = 0; i < forecasts.length; i++) {
       locations_list.push(forecasts[i].Location);
     }
     setLocations(Array.from(new Set(locations_list)));
-  })
+  },[forecasts]);
 
   useEffect(() => {
     for (var i = 0; i < forecasts.length; i++) {
@@ -121,12 +121,22 @@ function App() {
     return (
       <Application style={{ textAlign: "center" }} theme={theme}>
         <h1 className="title">Kanda Weather Forecast</h1>
-        <div>
-          <div style={{ alignItems:"center", justifyContent:"center", display: "flex", flexDirection: "row" }}>
-            <WeatherDatePicker changed={setDate} />
-            <LocationDD changed={setLocationState} locations={locations} />
-          </div>
-          <MainBox isForecastPresent={isForecastPresent} userForecast={userForecast}/>
+        <div
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+            display: "flex",
+            flexDirection: "row",
+          }}
+        >
+          <WeatherDatePicker changed={setDate} />
+          <LocationDD changed={setLocationState} locations={locations} />
+        </div>
+        <div style={{ marginLeft: 100, marginRight: 100 }}>
+          <TempCondHumidCard
+            isForecastPresent={isForecastPresent}
+            userForecast={userForecast}
+          />
         </div>
       </Application>
     );

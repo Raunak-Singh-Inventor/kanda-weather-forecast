@@ -1,8 +1,8 @@
 import React from "react";
 import { Card } from "react-rainbow-components";
-import "./MainBox.css";
+import "./TempCondHumidCard.css";
 
-export default function MainBox(props) {
+export default function TempCondHumidCard(props) {
   return (
     <Card className="card" style={{ width: 350 }}>
       {props.isForecastPresent ? (
