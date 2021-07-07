@@ -4,6 +4,7 @@ import { Application } from "react-rainbow-components";
 import { LocationDD } from "./components/LocationDD";
 import { WeatherDatePicker } from "./components/WeatherDatePicker";
 import TempCondHumidCard from "./components/TempCondHumidCard/TempCondHumidCard";
+import FloodRiskCard from "./components/FloodRiskCard/FloodRiskCard";
 import "./App.css";
 
 const theme = {
@@ -22,6 +23,8 @@ function App() {
   const [locationState, setLocationState] = useState("");
   const [userForecast, setUserForecast] = useState({});
   const [isForecastPresent, setIsForecastPresent] = useState(false);
+  const [uyoNGsmData, setUyoNGsmData] = useState(46.5);
+  const [accraGHsmData, setAccraGHsmData] = useState(0.1);
 
   const getData = () => {
     fetch(raw_forecasts)
@@ -78,7 +81,7 @@ function App() {
       locations_list.push(forecasts[i].Location);
     }
     setLocations(Array.from(new Set(locations_list)));
-  },[forecasts]);
+  }, [forecasts]);
 
   useEffect(() => {
     for (var i = 0; i < forecasts.length; i++) {
@@ -117,6 +120,46 @@ function App() {
     }
   }, [date, locationState, forecasts]);
 
+  useEffect(() => {
+    var datetime =
+      date.getFullYear() +
+      "-" +
+      (date.getMonth() + 1) +
+      "-" +
+      date.getDate() +
+      " 01:00:00+01:00";
+    let datetime_filtered = datetime
+      .replace("-1", "-01")
+      .replace("-2", "-02")
+      .replace("-3", "-03")
+      .replace("-4", "-04")
+      .replace("-5", "-05")
+      .replace("-6", "-06")
+      .replace("-7", "-07")
+      .replace("-8", "-08")
+      .replace("-9", "-09");
+    console.log(datetime_filtered);
+
+    async function fetchUyoNGsmData() {
+      const proxyurl = "https://cors-anywhere.herokuapp.com/";
+      const url =
+        "https://api.dclimate.net/apiv2/grid-history/era5_volumetric_soil_water_layer_1-hourly/5.6901705_-0.2099204?also_return_metadata=false&use_imperial_units=true&also_return_snapped_coordinates=true&convert_to_local_time=true";
+      let response = await fetch(proxyurl + url);
+      response = await response.json();
+      return response.data[datetime];
+    }
+    async function fetchAccraGHsmData() {
+      const proxyurl = "https://cors-anywhere.herokuapp.com/";
+      const url =
+        "https://api.dclimate.net/apiv2/grid-history/era5_volumetric_soil_water_layer_1-hourly/5.0405866_7.9194225?also_return_metadata=false&use_imperial_units=true&also_return_snapped_coordinates=true&convert_to_local_time=true";
+      let response = await fetch(proxyurl + url);
+      response = await response.json();
+      return response.data[datetime];
+    }
+    // setUyoNGsmData(fetchUyoNGsmData());
+    // setAccraGHsmData(fetchAccraGHsmData());
+  }, [date,locationState]);
+
   if (isLoaded) {
     return (
       <Application style={{ textAlign: "center" }} theme={theme}>
@@ -132,10 +175,15 @@ function App() {
           <WeatherDatePicker changed={setDate} />
           <LocationDD changed={setLocationState} locations={locations} />
         </div>
-        <div style={{ marginLeft: 100, marginRight: 100 }}>
+        <div className="rainbow-align-content_center rainbow-p-around_medium">
           <TempCondHumidCard
             isForecastPresent={isForecastPresent}
             userForecast={userForecast}
+          />
+          <FloodRiskCard
+            location={locationState.label}
+            uyoNGsmData={uyoNGsmData}
+            accraGHsmData={accraGHsmData}
           />
         </div>
       </Application>
