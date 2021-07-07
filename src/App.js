@@ -5,6 +5,7 @@ import { LocationDD } from "./components/LocationDD";
 import { WeatherDatePicker } from "./components/WeatherDatePicker";
 import TempCondHumidCard from "./components/TempCondHumidCard/TempCondHumidCard";
 import FloodRiskCard from "./components/FloodRiskCard/FloodRiskCard";
+import AirQualityCard from "./components/AirQualityCard/AirQualityCard";
 import "./App.css";
 
 const theme = {
@@ -20,11 +21,11 @@ function App() {
   const [isLoaded, setisLoaded] = useState(false);
   const [locations, setLocations] = useState([]);
   const [date, setDate] = useState(new Date());
-  const [locationState, setLocationState] = useState("");
+  const [locationState, setLocationState] = useState("?");
   const [userForecast, setUserForecast] = useState({});
   const [isForecastPresent, setIsForecastPresent] = useState(false);
-  const [uyoNGsmData, setUyoNGsmData] = useState(46.5);
-  const [accraGHsmData, setAccraGHsmData] = useState(0.1);
+  const [uyoNGsmData, setUyoNGsmData] = useState({});
+  const [accraGHsmData, setAccraGHsmData] = useState({});
 
   const getData = () => {
     fetch(raw_forecasts)
@@ -110,10 +111,11 @@ function App() {
             .replace(" 8 ", " 08 ")
             .replace(" 9 ", " 09 ")
         ) === true &&
-        locationState.label === forecasts[i].Location
+        locationState === forecasts[i].Location.replace(",", "")
       ) {
         setUserForecast(forecasts[i]);
         setIsForecastPresent(true);
+        return;
       } else {
         setIsForecastPresent(false);
       }
@@ -121,14 +123,9 @@ function App() {
   }, [date, locationState, forecasts]);
 
   useEffect(() => {
-    var datetime =
-      date.getFullYear() +
-      "-" +
-      (date.getMonth() + 1) +
-      "-" +
-      date.getDate() +
-      " 01:00:00+01:00";
-    let datetime_filtered = datetime
+    var fDate =
+      date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+    fDate = fDate
       .replace("-1", "-01")
       .replace("-2", "-02")
       .replace("-3", "-03")
@@ -138,27 +135,32 @@ function App() {
       .replace("-7", "-07")
       .replace("-8", "-08")
       .replace("-9", "-09");
-    console.log(datetime_filtered);
 
     async function fetchUyoNGsmData() {
-      const proxyurl = "https://cors-anywhere.herokuapp.com/";
+      setUyoNGsmData({})
+      const proxyurl = "";
       const url =
         "https://api.dclimate.net/apiv2/grid-history/era5_volumetric_soil_water_layer_1-hourly/5.6901705_-0.2099204?also_return_metadata=false&use_imperial_units=true&also_return_snapped_coordinates=true&convert_to_local_time=true";
       let response = await fetch(proxyurl + url);
       response = await response.json();
-      return response.data[datetime];
+      setUyoNGsmData(response.data[fDate + " 00:00:00+00:00"]);
     }
     async function fetchAccraGHsmData() {
-      const proxyurl = "https://cors-anywhere.herokuapp.com/";
+      setAccraGHsmData({})
+      const proxyurl = "";
       const url =
         "https://api.dclimate.net/apiv2/grid-history/era5_volumetric_soil_water_layer_1-hourly/5.0405866_7.9194225?also_return_metadata=false&use_imperial_units=true&also_return_snapped_coordinates=true&convert_to_local_time=true";
       let response = await fetch(proxyurl + url);
       response = await response.json();
-      return response.data[datetime];
+      setAccraGHsmData(response.data[fDate + " 00:00:00+01:00"]);
     }
-    // setUyoNGsmData(fetchUyoNGsmData());
-    // setAccraGHsmData(fetchAccraGHsmData());
-  }, [date,locationState]);
+    fetchUyoNGsmData();
+    fetchAccraGHsmData();
+  }, [date]);
+
+  const onLocationChange = (value) => {
+    setLocationState(value);
+  };
 
   if (isLoaded) {
     return (
@@ -173,18 +175,27 @@ function App() {
           }}
         >
           <WeatherDatePicker changed={setDate} />
-          <LocationDD changed={setLocationState} locations={locations} />
+          <LocationDD
+            onLocationChange={onLocationChange}
+            locations={locations}
+          />
         </div>
         <div className="rainbow-align-content_center rainbow-p-around_medium">
           <TempCondHumidCard
             isForecastPresent={isForecastPresent}
             userForecast={userForecast}
           />
-          <FloodRiskCard
-            location={locationState.label}
-            uyoNGsmData={uyoNGsmData}
-            accraGHsmData={accraGHsmData}
-          />
+          <div className="rainbow-p-around_medium">
+            <FloodRiskCard
+              uyoNGsmData={String(uyoNGsmData)}
+              accraGHsmData={String(accraGHsmData)}
+              location={locationState}
+            />
+            <AirQualityCard
+              isForecastPresent={isForecastPresent}
+              userForecast={userForecast}
+            />
+          </div>
         </div>
       </Application>
     );

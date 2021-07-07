@@ -10,6 +10,7 @@ export default function TempCondHumidCard(props) {
           <h1 className="temp-text">{props.userForecast.Temperature}</h1>
           <h1 className="cond-text">{props.userForecast.Condition}</h1>
           <h1 className="humidity-text">Humidity: {props.userForecast.Humidity}</h1>
+          <h1 className="rain-text">Chance of Rain: {props.userForecast.chanceOfRain}</h1>
         </>
       ) : (
         <h1 className="temp-text">Sorry</h1>
