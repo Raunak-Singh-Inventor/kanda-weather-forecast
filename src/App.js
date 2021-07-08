@@ -137,7 +137,7 @@ function App() {
       .replace("-9", "-09");
 
     async function fetchUyoNGsmData() {
-      setUyoNGsmData({})
+      setUyoNGsmData({});
       const proxyurl = "";
       const url =
         "https://api.dclimate.net/apiv2/grid-history/era5_volumetric_soil_water_layer_1-hourly/5.6901705_-0.2099204?also_return_metadata=false&use_imperial_units=true&also_return_snapped_coordinates=true&convert_to_local_time=true";
@@ -146,7 +146,7 @@ function App() {
       setUyoNGsmData(response.data[fDate + " 00:00:00+00:00"]);
     }
     async function fetchAccraGHsmData() {
-      setAccraGHsmData({})
+      setAccraGHsmData({});
       const proxyurl = "";
       const url =
         "https://api.dclimate.net/apiv2/grid-history/era5_volumetric_soil_water_layer_1-hourly/5.0405866_7.9194225?also_return_metadata=false&use_imperial_units=true&also_return_snapped_coordinates=true&convert_to_local_time=true";
@@ -165,7 +165,7 @@ function App() {
   if (isLoaded) {
     return (
       <Application style={{ textAlign: "center" }} theme={theme}>
-        <h1 className="title">Kanda Weather Forecast</h1>
+        <h1 className="title">gh-pages is WORKING</h1>
         <div
           style={{
             alignItems: "center",
