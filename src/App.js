@@ -165,7 +165,7 @@ function App() {
   if (isLoaded) {
     return (
       <Application style={{ textAlign: "center" }} theme={theme}>
-        <h1 className="title">gh-pages is WORKING</h1>
+        <h1 className="title">Kanda Weather Forecast</h1>
         <div
           style={{
             alignItems: "center",
