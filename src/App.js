@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import raw_forecasts from "../src/data/forecasts.txt";
-import { Application } from "react-rainbow-components";
+import { Application, Spinner } from "react-rainbow-components";
 import { LocationDD } from "./components/LocationDD";
 import { WeatherDatePicker } from "./components/WeatherDatePicker";
 import TempCondHumidCard from "./components/TempCondHumidCard/TempCondHumidCard";
@@ -200,7 +200,7 @@ function App() {
       </Application>
     );
   } else if (!isLoaded) {
-    return <h1>Loading</h1>;
+    return <Spinner size="x-large" />;
   }
 }
 

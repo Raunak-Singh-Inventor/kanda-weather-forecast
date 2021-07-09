@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "react-rainbow-components";
+import { Card, Spinner } from "react-rainbow-components";
 
 export default function FloodRiskCard(props) {
   console.log("Uyo, NG Soil Moisture Data: ", props.uyoNGsmData);
@@ -36,8 +36,8 @@ export default function FloodRiskCard(props) {
     );
   } else {
     return (
-      <Card style={{ width: 1000, margin: 15 }}>
-        <h1>Loading</h1>
+      <Card style={{ width: 1000, height:100, margin: 15 }}>
+        <Spinner size="large" />
       </Card>
     );
   }
