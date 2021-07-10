@@ -1,24 +1,32 @@
 {
   "files": {
-    "main.css": "/kanda-weather-forecast/static/css/main.afc11ad0.chunk.css",
-    "main.js": "/kanda-weather-forecast/static/js/main.e83302b5.chunk.js",
-    "main.js.map": "/kanda-weather-forecast/static/js/main.e83302b5.chunk.js.map",
-    "runtime-main.js": "/kanda-weather-forecast/static/js/runtime-main.765c384c.js",
-    "runtime-main.js.map": "/kanda-weather-forecast/static/js/runtime-main.765c384c.js.map",
-    "static/js/2.0c7d454d.chunk.js": "/kanda-weather-forecast/static/js/2.0c7d454d.chunk.js",
-    "static/js/2.0c7d454d.chunk.js.map": "/kanda-weather-forecast/static/js/2.0c7d454d.chunk.js.map",
-    "static/js/3.76ceee04.chunk.js": "/kanda-weather-forecast/static/js/3.76ceee04.chunk.js",
-    "static/js/3.76ceee04.chunk.js.map": "/kanda-weather-forecast/static/js/3.76ceee04.chunk.js.map",
+    "main.css": "/kanda-weather-forecast/static/css/main.3d185944.chunk.css",
+    "main.js": "/kanda-weather-forecast/static/js/main.56ca62d4.chunk.js",
+    "main.js.map": "/kanda-weather-forecast/static/js/main.56ca62d4.chunk.js.map",
+    "runtime-main.js": "/kanda-weather-forecast/static/js/runtime-main.0098f76b.js",
+    "runtime-main.js.map": "/kanda-weather-forecast/static/js/runtime-main.0098f76b.js.map",
+    "static/css/2.150d169a.chunk.css": "/kanda-weather-forecast/static/css/2.150d169a.chunk.css",
+    "static/js/2.a362b6a7.chunk.js": "/kanda-weather-forecast/static/js/2.a362b6a7.chunk.js",
+    "static/js/2.a362b6a7.chunk.js.map": "/kanda-weather-forecast/static/js/2.a362b6a7.chunk.js.map",
+    "static/js/3.c978393e.chunk.js": "/kanda-weather-forecast/static/js/3.c978393e.chunk.js",
+    "static/js/3.c978393e.chunk.js.map": "/kanda-weather-forecast/static/js/3.c978393e.chunk.js.map",
     "index.html": "/kanda-weather-forecast/index.html",
-    "static/css/main.afc11ad0.chunk.css.map": "/kanda-weather-forecast/static/css/main.afc11ad0.chunk.css.map",
-    "static/js/2.0c7d454d.chunk.js.LICENSE.txt": "/kanda-weather-forecast/static/js/2.0c7d454d.chunk.js.LICENSE.txt",
-    "static/media/index.css": "/kanda-weather-forecast/static/media/exo-black-italic.5113cd68.otf",
-    "static/media/forecasts.18de50e9.txt": "/kanda-weather-forecast/static/media/forecasts.18de50e9.txt"
+    "static/css/2.150d169a.chunk.css.map": "/kanda-weather-forecast/static/css/2.150d169a.chunk.css.map",
+    "static/css/main.3d185944.chunk.css.map": "/kanda-weather-forecast/static/css/main.3d185944.chunk.css.map",
+    "static/js/2.a362b6a7.chunk.js.LICENSE.txt": "/kanda-weather-forecast/static/js/2.a362b6a7.chunk.js.LICENSE.txt",
+    "static/media/BadAirQuality.26d6a4f2.png": "/kanda-weather-forecast/static/media/BadAirQuality.26d6a4f2.png",
+    "static/media/Flood.d82da8e0.png": "/kanda-weather-forecast/static/media/Flood.d82da8e0.png",
+    "static/media/GoodAirQuality.2bc89c4e.png": "/kanda-weather-forecast/static/media/GoodAirQuality.2bc89c4e.png",
+    "static/media/dayBackground.8066f63e.jpg": "/kanda-weather-forecast/static/media/dayBackground.8066f63e.jpg",
+    "static/media/index.css": "/kanda-weather-forecast/static/media/exo-medium.d236abec.otf",
+    "static/media/forecasts.18de50e9.txt": "/kanda-weather-forecast/static/media/forecasts.18de50e9.txt",
+    "static/media/nightBackground.a0ef28dc.jpg": "/kanda-weather-forecast/static/media/nightBackground.a0ef28dc.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.765c384c.js",
-    "static/js/2.0c7d454d.chunk.js",
-    "static/css/main.afc11ad0.chunk.css",
-    "static/js/main.e83302b5.chunk.js"
+    "static/js/runtime-main.0098f76b.js",
+    "static/css/2.150d169a.chunk.css",
+    "static/js/2.a362b6a7.chunk.js",
+    "static/css/main.3d185944.chunk.css",
+    "static/js/main.56ca62d4.chunk.js"
   ]
 }
