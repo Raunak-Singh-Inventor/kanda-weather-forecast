@@ -236,15 +236,11 @@ function App() {
           {isDarkMode ? (
             <>
               <h4 style={{ color: "white" }}>
-                RELOAD the page to select different language
-              </h4>
-              <h4 style={{ color: "white" }}>
                 Made with ❤️ in React by Raunak Singh
               </h4>
             </>
           ) : (
             <>
-              <h4>RELOAD the page to select different language</h4>
               <h4>Made with ❤️ in React by Raunak Singh</h4>
             </>
           )}
