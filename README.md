@@ -19,7 +19,7 @@ This project was made using Create-React-App. For deplyoment on other platforms,
 Note: The Heroku CORS server limits requests to the dClimate Soil Moisture API to 50 requests per hour. When deploying on other platforms (such as Amplify, Azure, Firebase, etc.) the CORS server may not be needed as most servers on the cloud have CORS anywhere permissions.
 
 ## Adjusting the backend parameters
-The soil moisture and flood risk (flood risk is calculated from the soil moisture) data come from the dClimate API in the backend. The rest of the parameters `[Temperature,Condition,Humidity,Chance of Rain,Pressure,Wind]` can be adjusted from the `forecasts.txt` in the data directory. Just copy paste your data into the txt and see the weather forecast get updated. 
+The website can handle multiple locations and forecasts. The soil moisture and flood risk (flood risk is calculated from the soil moisture) data come from the dClimate API in the backend. The rest of the parameters `[Temperature,Condition,Humidity,Chance of Rain,Pressure,Wind]` can be adjusted from the `forecasts.txt` in the data directory. Just copy paste your data into the txt and see the weather forecast get updated. 
 
 ### Issues
 Any questions regarding this website can be put in the `Issues` page of this repo. 🙂
