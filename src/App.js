@@ -144,7 +144,7 @@ function App() {
 
     async function fetchUyoNGsmData() {
       setUyoNGsmData({});
-      const proxyurl = "";
+      const proxyurl = "https://cors-anywhere.herokuapp.com/";
       const url =
         "https://api.dclimate.net/apiv2/grid-history/era5_volumetric_soil_water_layer_1-hourly/5.6901705_-0.2099204?also_return_metadata=false&use_imperial_units=true&also_return_snapped_coordinates=true&convert_to_local_time=true";
       let response = await fetch(proxyurl + url);
@@ -153,7 +153,7 @@ function App() {
     }
     async function fetchAccraGHsmData() {
       setAccraGHsmData({});
-      const proxyurl = "";
+      const proxyurl = "https://cors-anywhere.herokuapp.com/";
       const url =
         "https://api.dclimate.net/apiv2/grid-history/era5_volumetric_soil_water_layer_1-hourly/5.0405866_7.9194225?also_return_metadata=false&use_imperial_units=true&also_return_snapped_coordinates=true&convert_to_local_time=true";
       let response = await fetch(proxyurl + url);
@@ -225,6 +225,13 @@ function App() {
               />
             </div>
           </div>
+          {isDarkMode ? (
+            <h4 style={{ color: "white" }}>
+              Made with ❤️ in React by Raunak Singh
+            </h4>
+          ) : (
+            <h4>Made with ❤️ in React by Raunak Singh</h4>
+          )}
         </Application>
       </div>
     );
