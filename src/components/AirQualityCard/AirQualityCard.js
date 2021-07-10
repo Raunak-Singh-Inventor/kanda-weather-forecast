@@ -11,6 +11,9 @@ export default function AirQualityCard(props) {
           <h1 style={{ fontSize: 50, fontFamily: "ExoMedium" }}>
             💨Wind: {props.userForecast.Wind}
           </h1>
+          <h1 style={{ fontSize: 50, fontFamily: "ExoMedium" }}>
+            Pressure: {props.userForecast.Pressure}
+          </h1>
           {props.userForecast.Wind !== "Unknown" ? (
             props.userForecast.Wind.match(/\d+/) > 5 ? (
               <>
