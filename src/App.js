@@ -34,6 +34,7 @@ function App() {
   const [bg, setBg] = useState("");
 
   const getData = () => {
+    // fetch the forecasts/hindcasts from the txt and convert the data into a dict object
     fetch(raw_forecasts)
       .then((r) => r.text())
       .then((forecasts_text) => {
@@ -83,6 +84,7 @@ function App() {
   }, []);
 
   useEffect(() => {
+    // get the locations from the forecasts dict to display in location dropdown (LocationDD)
     let locations_list = [];
     for (var i = 0; i < forecasts.length; i++) {
       locations_list.push(forecasts[i].Location);
@@ -91,6 +93,7 @@ function App() {
   }, [forecasts]);
 
   useEffect(() => {
+    // find if date and location picked by user are present in forecasts dict
     for (var i = 0; i < forecasts.length; i++) {
       if (
         String(date).includes(
@@ -129,6 +132,7 @@ function App() {
   }, [date, locationState, forecasts]);
 
   useEffect(() => {
+    // Grab the soil moisture data from the dClimate API for the picked date
     var fDate =
       date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
     fDate = fDate
@@ -144,6 +148,7 @@ function App() {
 
     async function fetchUyoNGsmData() {
       setUyoNGsmData({});
+      // the CORS server is needed in development and Github Pages to communicate with the dClimate API
       const proxyurl = "https://cors-anywhere.herokuapp.com/";
       const url =
         "https://api.dclimate.net/apiv2/grid-history/era5_volumetric_soil_water_layer_1-hourly/5.6901705_-0.2099204?also_return_metadata=false&use_imperial_units=true&also_return_snapped_coordinates=true&convert_to_local_time=true";
@@ -153,6 +158,7 @@ function App() {
     }
     async function fetchAccraGHsmData() {
       setAccraGHsmData({});
+      // the CORS server is needed in development and Github Pages to communicate with the dClimate API
       const proxyurl = "https://cors-anywhere.herokuapp.com/";
       const url =
         "https://api.dclimate.net/apiv2/grid-history/era5_volumetric_soil_water_layer_1-hourly/5.0405866_7.9194225?also_return_metadata=false&use_imperial_units=true&also_return_snapped_coordinates=true&convert_to_local_time=true";
@@ -169,9 +175,11 @@ function App() {
   };
 
   useEffect(() => {
+    // sets the background depending on whether it is dark mode or not
     isDarkMode ? setBg(nightBackground) : setBg(dayBackground);
   }, [isDarkMode]);
 
+  // isLoaded is true if the data from the txt has been put in the forecasts dict
   if (isLoaded) {
     return (
       <div style={{ height: 1000, backgroundImage: `url(${bg})` }}>

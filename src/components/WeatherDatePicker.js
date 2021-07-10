@@ -7,7 +7,7 @@ export const WeatherDatePicker = (props) => {
   return (
     <div>
       <DatePicker
-        style={{width:250}}
+        style={{ width: 250 }}
         formatStyle="large"
         placeholder="Select A Date"
         value={date}

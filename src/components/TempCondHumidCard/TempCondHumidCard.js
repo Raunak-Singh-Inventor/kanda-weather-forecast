@@ -4,8 +4,12 @@ import "./TempCondHumidCard.css";
 
 export default function TempCondHumidCard(props) {
   return (
-    <Card className="card" style={{ borderColor: "purple", borderWidth: 5, width:400 }}>
-      {props.userForecast.Condition === "Partly Cloudy" && props.isForecastPresent ? (
+    <Card
+      className="card"
+      style={{ borderColor: "purple", borderWidth: 5, width: 400 }}
+    >
+      {props.userForecast.Condition === "Partly Cloudy" &&
+      props.isForecastPresent ? (
         <h1 style={{ fontSize: 200 }}>⛅</h1>
       ) : (
         console.log()
@@ -36,7 +40,9 @@ export default function TempCondHumidCard(props) {
           </h1>
         </>
       ) : (
-        <h1 style={{fontFamily:"ExoMedium",fontSize:50}}>We don't have data for that date and/or location</h1>
+        <h1 style={{ fontFamily: "ExoMedium", fontSize: 50 }}>
+          We don't have data for that date and/or location
+        </h1>
       )}
     </Card>
   );

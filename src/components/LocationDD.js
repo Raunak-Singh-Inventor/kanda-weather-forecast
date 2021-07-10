@@ -6,11 +6,11 @@ export const LocationDD = (props) => {
   return (
     <div>
       <Picklist
-        style={{width:250}}
+        style={{ width: 250 }}
         placeholder="Select A Location"
         formatStyle="large"
         onChange={(value) => {
-          setLoc(value)
+          setLoc(value);
           props.onLocationChange(String(value.label).replace(",", ""));
         }}
         value={loc}

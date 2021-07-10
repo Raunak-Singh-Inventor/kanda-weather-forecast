@@ -43,7 +43,9 @@ export default function AirQualityCard(props) {
           )}
         </>
       ) : (
-        <h1 style={{fontFamily:"ExoMedium",fontSize:50}}>We don't have data for that date and/or location</h1>
+        <h1 style={{ fontFamily: "ExoMedium", fontSize: 50 }}>
+          We don't have data for that date and/or location
+        </h1>
       )}
     </Card>
   );
