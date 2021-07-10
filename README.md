@@ -7,10 +7,11 @@ To view a demo of my website hosted on Github Pages:
 2. View my website at [https://Raunak-Singh-Inventor.github.io/kanda-weather-forecast/](https://Raunak-Singh-Inventor.github.io/kanda-weather-forecast/)
 
 ## Local Host Development 
-To view in development mode on localhost
+To view in development mode on localhost:
 1. `git clone` this repository
 2. Navigate to the cloned repo
-3. Run `yarn start` and see the website open in development mode in your default browser
+3. Click this link [https://cors-anywhere.herokuapp.com/corsdemo](https://cors-anywhere.herokuapp.com/corsdemo) and then click the `Request temporary access to the demo server` button to get temporary access to the Heroku CORS server the website uses to communicate with the dClimate API.
+4. Run `yarn start` and see the website open in development mode
 
 ## Deployment on other platforms
 This project was made using Create-React-App. For deplyoment on other platforms, follow the Create-React-App instructions: [https://create-react-app.dev/docs/deployment/](https://create-react-app.dev/docs/deployment/)
