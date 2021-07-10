@@ -5,8 +5,9 @@ export const WeatherDatePicker = (props) => {
   const [date, setDate] = useState(new Date());
 
   return (
-    <div className="rainbow-m-around_medium">
+    <div>
       <DatePicker
+        style={{width:250}}
         formatStyle="large"
         placeholder="Select A Date"
         value={date}

@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import raw_forecasts from "../src/data/forecasts.txt";
-import { Application, Spinner } from "react-rainbow-components";
+import { Application, CheckboxToggle, Spinner } from "react-rainbow-components";
 import { LocationDD } from "./components/LocationDD";
 import { WeatherDatePicker } from "./components/WeatherDatePicker";
 import TempCondHumidCard from "./components/TempCondHumidCard/TempCondHumidCard";
 import FloodRiskCard from "./components/FloodRiskCard/FloodRiskCard";
 import AirQualityCard from "./components/AirQualityCard/AirQualityCard";
+import GoogleTranslate from "./components/GoogleTranslate";
+import dayBackground from "./images/dayBackground.jpg";
+import nightBackground from "./images/nightBackground.jpg";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 const theme = {
@@ -26,6 +30,8 @@ function App() {
   const [isForecastPresent, setIsForecastPresent] = useState(false);
   const [uyoNGsmData, setUyoNGsmData] = useState({});
   const [accraGHsmData, setAccraGHsmData] = useState({});
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [bg, setBg] = useState("");
 
   const getData = () => {
     fetch(raw_forecasts)
@@ -162,42 +168,65 @@ function App() {
     setLocationState(value);
   };
 
+  useEffect(() => {
+    isDarkMode ? setBg(nightBackground) : setBg(dayBackground);
+  }, [isDarkMode]);
+
   if (isLoaded) {
     return (
-      <Application style={{ textAlign: "center" }} theme={theme}>
-        <h1 className="title">Kanda Weather Forecast</h1>
-        <div
-          style={{
-            alignItems: "center",
-            justifyContent: "center",
-            display: "flex",
-            flexDirection: "row",
-          }}
-        >
-          <WeatherDatePicker changed={setDate} />
-          <LocationDD
-            onLocationChange={onLocationChange}
-            locations={locations}
-          />
-        </div>
-        <div className="rainbow-align-content_center rainbow-p-around_medium">
-          <TempCondHumidCard
-            isForecastPresent={isForecastPresent}
-            userForecast={userForecast}
-          />
-          <div className="rainbow-p-around_medium">
-            <FloodRiskCard
-              uyoNGsmData={String(uyoNGsmData)}
-              accraGHsmData={String(accraGHsmData)}
-              location={locationState}
-            />
-            <AirQualityCard
+      <div style={{ height: 1000, backgroundImage: `url(${bg})` }}>
+        <Application style={{ textAlign: "center" }} theme={theme}>
+          <div className="row">
+            <div className="col-md-3">
+              <GoogleTranslate />
+            </div>
+            <h1 className="title col-md-6">Kanda Weather Forecast</h1>
+            <div className="col-md-3">
+              <CheckboxToggle
+                value={isDarkMode}
+                onChange={() => {
+                  setIsDarkMode(!isDarkMode);
+                }}
+              />
+              {isDarkMode ? (
+                <h1 style={{ fontSize: 40 }}>🌛</h1>
+              ) : (
+                <h1 style={{ fontSize: 40 }}>🌞</h1>
+              )}
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-4"></div>
+            <div className="col-md-2" style={{ marginRight: 5 }}>
+              <WeatherDatePicker changed={setDate} />
+            </div>
+            <div className="col-md-2" style={{ marginLeft: 5 }}>
+              <LocationDD
+                onLocationChange={onLocationChange}
+                locations={locations}
+              />
+            </div>
+            <div className="col-md-4"></div>
+          </div>
+          <div className="rainbow-align-content_center rainbow-p-around_medium">
+            <TempCondHumidCard
               isForecastPresent={isForecastPresent}
               userForecast={userForecast}
             />
+            <div className="rainbow-p-around_medium">
+              <FloodRiskCard
+                uyoNGsmData={String(uyoNGsmData)}
+                accraGHsmData={String(accraGHsmData)}
+                location={locationState}
+              />
+              <AirQualityCard
+                isForecastPresent={isForecastPresent}
+                userForecast={userForecast}
+              />
+            </div>
           </div>
-        </div>
-      </Application>
+        </Application>
+      </div>
     );
   } else if (!isLoaded) {
     return <Spinner size="x-large" />;

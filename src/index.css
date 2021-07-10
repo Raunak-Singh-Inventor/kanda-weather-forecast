@@ -18,3 +18,10 @@ code {
    url("./Fonts/exo-black-italic.otf") format("truetype");
   font-weight: bold;
 }
+
+@font-face {
+  font-family: "ExoMedium";
+  src: local("ExoMedium"),
+   url("./Fonts/exo-medium.otf") format("truetype");
+  font-weight: bold;
+}

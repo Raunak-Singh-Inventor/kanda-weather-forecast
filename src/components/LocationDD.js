@@ -4,8 +4,9 @@ import { Picklist, Option } from "react-rainbow-components";
 export const LocationDD = (props) => {
   const [loc, setLoc] = useState({});
   return (
-    <div className="rainbow-m-around_small">
+    <div>
       <Picklist
+        style={{width:250}}
         placeholder="Select A Location"
         formatStyle="large"
         onChange={(value) => {
